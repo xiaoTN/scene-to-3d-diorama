@@ -1,70 +1,82 @@
 # Scene to 3D Diorama
 
-[中文](#中文) · [English](#english)
+**把风景做成桌上的微缩世界。**<br>
+Turn a landscape into a standalone 3D miniature diorama image.
 
-## 中文
+[效果预览](#examples) · [安装](#install) · [使用](#usage) · [English](#english) · [素材与授权](#rights)
 
-把一张游戏截图、风景照片或插画转化成**独立的 3D 微缩沙盘效果图**。这是一个供 AI 助手读取的 skill，重点是让山峰、峡谷、河流和建筑具有真实的空间层次，而不是把原图贴在平板上。
+<a id="examples"></a>
+## 效果预览
 
-### 效果特点
+《塞尔达传说：旷野之息》场景示例。**上：来源截图 · 下：AI 生成沙盘**，点击图片查看大图。<br>
+*The Legend of Zelda: Breath of the Wild. Top: source screenshot. Bottom: AI-generated diorama. Click to enlarge.*
 
-- **只输出沙盘**：默认不拼接原图；明确提出时才做前后对照。
-- **地形有高低**：识别山峰、坡地和下凹的峡谷或水潭，保持水流和地貌关系。
-- **底座自由设计**：可选薄地形切片、岩石底座或浅水盆，不强制使用厚托盘。
-- **保留场景辨识度**：根据输入图重建角色、地貌、色彩和光线，而不照搬其他风格参考图的内容。
+| 双子山<br>Dueling Peaks | 大师剑<br>Master Sword | 初始台地<br>Great Plateau |
+| :---: | :---: | :---: |
+| [<img src="docs/examples/dueling-peaks.jpg" width="280" alt="双子山上下对照：游戏截图与 AI 生成的山谷沙盘">](docs/examples/dueling-peaks.jpg) | [<img src="docs/examples/master-sword.jpg" width="280" alt="大师剑上下对照：游戏截图与 AI 生成的林间沙盘">](docs/examples/master-sword.jpg) | [<img src="docs/examples/great-plateau.jpg" width="280" alt="初始台地上下对照：游戏截图与 AI 生成的全景沙盘">](docs/examples/great-plateau.jpg) |
+| 山峰体积与下凹河谷 | 林间光线与独立底座 | 远近层次与地貌重构 |
 
-### 安装
+默认只生成独立沙盘图；这里按要求拼接为对照图。示例用于展示效果，不代表逐像素复刻。游戏素材不属于本仓库的 MIT 授权，详见[示例来源与权利说明](docs/examples/README.md)。
 
-将本仓库克隆到支持 Agent Skills 的助手的技能目录。下面以 `~/.agents/skills` 为例；实际目录请参考所用助手的文档。
+### 这个 skill 做什么
+
+- **塑造地形**：让山峰、建筑具有体积，让峡谷、河床和水潭有可见深度。
+- **保留场景**：依据原图重建地貌、主体、色彩与光线。
+- **设计底座**：选择适合场景的地形切片、岩石基座或浅水盆，不强制套用厚托盘。
+
+输出是 **AI 生成的沙盘效果图**，不是可打印的 3D 模型或网格。
+
+<a id="install"></a>
+## 安装
+
+将仓库克隆到助手的 Agent Skills 目录。以下以 `~/.agents/skills` 为例，实际路径以所用助手为准。
+
+**macOS / Linux**
 
 ```bash
 git clone https://github.com/xiaoTN/scene-to-3d-diorama.git ~/.agents/skills/scene-to-3d-diorama
 ```
 
-Windows PowerShell：
+**Windows PowerShell**
 
 ```powershell
 git clone https://github.com/xiaoTN/scene-to-3d-diorama.git "$HOME\.agents\skills\scene-to-3d-diorama"
 ```
 
-助手在启动时加载技能的情况下，安装后可能需要新建或重启会话。
+若助手在启动时加载技能，安装后新建或重启会话。完整指令见 [SKILL.md](SKILL.md)。
 
-### 使用
+<a id="usage"></a>
+## 使用
 
-上传或指定一张图片，然后对支持**参考图编辑**的助手说：
+上传或指定一张图片，对支持**参考图编辑**的助手说：
 
 > 使用 scene-to-3d-diorama，把这张风景图做成独立的 3D 微缩沙盘。山峰要突出，河谷要下凹，底座按场景设计。
 
-也可以提出材质、视角、底座形状或画面比例等偏好。技能指导助手调用可用的图像编辑能力，本仓库不包含图片生成模型或 API 密钥；实际输出是**沙盘效果图**，不是可打印的 3D 模型文件。
+可以补充材质、视角、底座形状和画面比例。需要对照时，再加一句：
 
-### 素材与授权
+> 把原图放上面，生成的沙盘放下面，拼成一张对照图。
 
-请使用你有权处理的图片。生成图并不会自动获得原素材或其中人物、游戏、美术内容的商用授权。公开发布或商用前，请确认素材权利、平台 AI 标识规则和品牌方要求。仓库不包含游戏截图或此前的品牌合作素材。
+本仓库提供技能指令，不包含生成模型或 API 密钥；需要助手具备可编辑参考图的图像生成工具。
 
+<a id="english"></a>
 ## English
 
-Create a **standalone 3D miniature diorama image** from a landscape photo, game screenshot, or illustration. This Agent Skill guides an image-capable assistant to build visible terrain relief, recessed valleys and pools, and scene-appropriate bases—rather than placing a flat picture in a tray.
+This Agent Skill turns a landscape photo, game screenshot, or illustration into an image of a freestanding miniature scene. It emphasizes raised terrain, recessed valleys, recognizable landmarks, and a base suited to the source.
 
-### Install
-
-Clone into your assistant's Agent Skills directory; `~/.agents/skills` is an example and the actual path depends on your assistant.
-
-```bash
-git clone https://github.com/xiaoTN/scene-to-3d-diorama.git ~/.agents/skills/scene-to-3d-diorama
-```
-
-Start a new session if your assistant loads skills at startup.
-
-### Use
-
-Provide a source image and ask:
+1. **Install** into your assistant's Agent Skills directory using the [commands above](#install). Restart the session if needed.
+2. **Provide a source image** to an assistant with reference-image editing.
+3. **Ask:**
 
 > Use scene-to-3d-diorama to turn this image into a standalone miniature diorama. Emphasize the raised peaks and recessed valleys; design a base that suits the scene.
 
-The assistant needs an image-generation tool with reference-image editing. This repository contains instructions, not a model or API key. Outputs are generated **images**, not 3D meshes.
+By default, the output is a single diorama image. Request a top/bottom comparison separately, as in the [gallery](#examples). Results are AI-generated **images, not 3D meshes**. The repository contains instructions, not a model or API key.
 
-Use only source material you have rights to process. Check permissions, platform AI-disclosure requirements, and client approval before publication or commercial use. No game screenshots or brand campaign assets are included.
+<a id="rights"></a>
+## 素材与授权 · Rights
 
-## License
+请使用你有权处理的图片。公开发布或商用前，确认原素材及生成内容的使用权限、平台 AI 标识规则和品牌方要求。公开可访问的截图不等于允许再分发；[示例来源记录](docs/examples/README.md)不是授权证明。本项目与 Nintendo 无关联，亦未经其认可。
 
-[MIT](LICENSE) applies to this repository's skill instructions and documentation. It does not grant rights to third-party input images or guarantee rights in generated outputs.
+Use source material you have rights to process. Verify permissions and applicable AI-disclosure requirements before publication or commercial use. Public availability is not a redistribution license. See the [example sources and rights notes](docs/examples/README.md). This project is not affiliated with or endorsed by Nintendo.
+
+[MIT](LICENSE) 仅适用于技能指令与文档，不授予第三方图片、游戏素材或生成结果的权利。<br>
+The MIT license covers the skill instructions and documentation, not third-party images, game assets, or rights in generated outputs.
